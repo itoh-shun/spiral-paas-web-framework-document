@@ -248,3 +248,19 @@ Please select the environment you wish to reflect. [<識別子>] :＜識別子�
 
 以上で差分をデプロイすることが可能です。
 
+## プロジェクトをSpiralのWEBコンポーネントから呼び出す。
+
+### Startup ファイルを require_once する
+
+フレームワークでapp:init した構成は、デプロイするとカスタムモジュールにセットされます。
+基本的にPHPが使えるページであれば設置可能ですが、推奨はマイエリアカスタムページです。
+
+カスタムページ
+~~~
+<?php // <!-- SMP_DYNAMIC_PAGE DISPLAY_ERRORS=ON NAME=HOGE -->
+
+require_once "{project_name}/StartUp/web.php";
+
+~~~
+
+このように記載し、プレビューで確認しましょう。
