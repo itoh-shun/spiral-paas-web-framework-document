@@ -38,7 +38,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         title: 'Spiral Framework',
         logo: {
           alt: 'Spiral Framework',
-          src: 'img/logo.svg',
+          src: 'img/logo.png',
         },
         items: [
           {
