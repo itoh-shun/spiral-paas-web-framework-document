@@ -44,14 +44,6 @@ SpiralDB::title('db_title')->fields(['field1', 'field2'])->orWhere('field1' , $v
 ### whereIn
 IN検索条件をセットします。
 ~~~
-SpiralDB::title('db_title')->fields(['field1', 'field2'])->whereIn('field1' , $value );
-
-SpiralDB::title('db_title')->fields(['field1', 'field2'])->whereIn('field1' , $value , '!=');
-~~~
-
-### whereIn
-IN検索条件をセットします。
-~~~
 SpiralDB::title('db_title')->fields(['field1', 'field2'])->whereIn('field1' ,  ['value1', 'value2']);
 ~~~
 
