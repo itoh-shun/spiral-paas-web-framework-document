@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Getting Started
+# Installation
 
 ## Windowsで始める
 
@@ -248,9 +248,16 @@ Please select the environment you wish to reflect. [<識別子>] :＜識別子�
 
 以上で差分をデプロイすることが可能です。
 
+#### ちなみに
+init したプロジェクトファイル内にあるmakeAutoload.php はrequire_once を生成するコードでSpiralにアップロードされません。
+
+デプロイ時に実行したいコードがある場合は、自由に記述可能です。
+
+例えば、tailwindcssのCSS生成のコマンドを実行したい場合などに記述可能です
+
 ## プロジェクトをSpiralのWEBコンポーネントから呼び出す。
 
-### Startup ファイルを require_once する
+### routes ファイルを require_once する
 
 フレームワークでapp:init した構成は、デプロイするとカスタムモジュールにセットされます。
 基本的にPHPが使えるページであれば設置可能ですが、推奨はマイエリアカスタムページです。
@@ -259,7 +266,7 @@ Please select the environment you wish to reflect. [<識別子>] :＜識別子�
 ~~~
 <?php // <!-- SMP_DYNAMIC_PAGE DISPLAY_ERRORS=ON NAME=HOGE -->
 
-require_once "{project_name}/StartUp/web.php";
+require_once "{project_name}/routes/web.php";
 
 ~~~
 
