@@ -167,6 +167,118 @@ $data = [
 SpiralDB::title('db_title')->upsertBulk('userId',$data);
 ~~~
 
+
+## Model を作ろう
+~~~
+SpiralDB::title('users')->fields(['id','email','name']);
+~~~
+
+こういった指定を毎回していては大変です。
+そこで簡単にアクセスできるようにModelを作りましょう。
+
+~~~
+use framework\SpiralConnecter\SpiralModel;
+use framework\SpiralConnecter\SpiralManager;
+
+class User extends SpiralModel {
+
+    // テーブル名と主キーの設定
+    protected array $fields= ['id','mailAddress','nameSei','nameMei' , 'password'];
+    protected string $title = 'User';
+    protected string $primaryKey = 'mailAddress';
+
+    // 新しいユーザーの作成例
+    public static function createNewUser($mailAddress, $nameSei, $nameMei , $password)
+    {
+        $user = new self();
+        $user->mailAddress= $mailAddress;
+        $user->nameSei= $nameSei;
+        $user->nameMei= $nameMei;
+        $user->password = $password;
+        $user->save();
+
+        return $user;
+    }
+}
+~~~
+
+こうすることで、このようにユーザー作成が可能になります。
+
+~~~
+$user = User::createNewUser('hoge@sample.com', 'hoge', 'fuga' , 'hogefuga');
+~~~
+
+### SpiralModel の機能
+
+#### __get __set
+
+\$fields に指定したキーのみマジックメソッドを使って上書きができます。
+
+#### find 
+
+primaryKey と一致するインスタンスを取得します。
+~~~
+use framework\SpiralConnecter\SpiralModel;
+use framework\SpiralConnecter\SpiralManager;
+
+class User extends SpiralModel {
+
+    // テーブル名と主キーの設定
+    protected array $fields= ['id','mailAddress','nameSei','nameMei' , 'password'];
+    protected string $title = 'User';
+    protected string $primaryKey = 'mailAddress';
+
+    // レコード取得
+    public static function findByEmailAddress($emailAddress)
+    {
+        return self::find($emailAddress);
+    }
+}
+~~~
+このように取得できます。
+~~~
+$user = User::findByEmailAddress('hoge@sample.com');
+~~~
+
+#### all 
+
+条件に一致する情報をすべて配列で取得します。
+~~~
+use framework\SpiralConnecter\SpiralModel;
+use framework\SpiralConnecter\SpiralManager;
+
+class User extends SpiralModel {
+
+    // テーブル名と主キーの設定
+    protected array $fields= ['id','mailAddress','nameSei','nameMei' , 'password', 'gender'];
+    protected string $title = 'User';
+    protected string $primaryKey = 'mailAddress';
+
+    // 男だけ取得
+    public static function getMens()
+    {
+        $instance = new static();
+        $instance->getManager()->where('gender', 'men');
+        $users = $instance->all();
+        return $users;
+    }
+}
+~~~
+このように取得できます。
+~~~
+$mens = User::getMens();
+~~~
+
+#### save 
+
+インスタンスに変更を加え、その内容で登録更新します。
+~~~
+$user = User::findByEmailAddress('hoge@sample.com');
+$user->nameSei = 'ほげ沢';
+$user->save();
+~~~
+
+
 ## メールを送信
 メール送信にはExpress2配信のAPIを利用します。
 
