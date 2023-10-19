@@ -278,7 +278,6 @@ $user->nameSei = 'ほげ沢';
 $user->save();
 ~~~
 
-
 ## メールを送信
 メール送信にはExpress2配信のAPIを利用します。
 
