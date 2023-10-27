@@ -118,3 +118,24 @@ Router::map("GET",  /user/:userId, function($vars){
 ~~~
 
 これによって、条件によるフィルターをかけ、あたかもリダイレクトしているかのようなふるまいが実装できます。
+
+## CRUD の一括設定
+Router::resourceを使用することで、一括でCRUDのルーティングが設定できます。
+
+一貫性のある設定が可能なので、API開発などに利用できます。
+
+~~~
+Router::resource('resource' , HogeController::class);
+~~~
+
+とすると、このようなルーティングが実装されたものと同一の動作を行います。
+
+~~~
+Router::map('GET', "/resource", [HogeController::class , 'index']);
+Router::map('GET', "/resource/create", [HogeController::class , 'create']);
+Router::map('POST', "/resource", [HogeController::class , 'store']);
+Router::map('GET', "/resource/:id", [HogeController::class , 'show']);
+Router::map('GET', "/resource/:id/edit", [HogeController::class , 'edit']);
+Router::map('PUT', "/resource/:id", [HogeController::class , 'update']);
+Router::map('DELETE', "/resource/:id", [HogeController::class , 'destroy']);
+~~~

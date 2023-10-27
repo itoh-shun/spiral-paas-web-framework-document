@@ -184,7 +184,7 @@ class User extends SpiralModel {
 
     // テーブル名と主キーの設定
     protected array $fields= ['id','mailAddress','nameSei','nameMei' , 'password'];
-    protected string $title = 'User';
+    protected string $db_title = 'User';
     protected string $primaryKey = 'mailAddress';
 
     // 新しいユーザーの作成例
@@ -225,7 +225,7 @@ class User extends SpiralModel {
 
     // テーブル名と主キーの設定
     protected array $fields= ['id','mailAddress','nameSei','nameMei' , 'password'];
-    protected string $title = 'User';
+    protected string $db_title = 'User';
     protected string $primaryKey = 'mailAddress';
 
     // レコード取得
@@ -251,7 +251,7 @@ class User extends SpiralModel {
 
     // テーブル名と主キーの設定
     protected array $fields= ['id','mailAddress','nameSei','nameMei' , 'password', 'gender'];
-    protected string $title = 'User';
+    protected string $db_title = 'User';
     protected string $primaryKey = 'mailAddress';
 
     // 男だけ取得

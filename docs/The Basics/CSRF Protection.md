@@ -32,7 +32,7 @@ CSRF保護がないと、悪意のあるWebサイトがアプリケーション�
 現在のセッションのCSRFトークンには、リクエストのセッションまたはヘルパー関数を介してアクセスできます。
 
 ~~~
-Router::group(VerifyCsrfTokenMiddleware::class, function (){
+Router::middlewares(VerifyCsrfTokenMiddleware::class, function (){
     Router::map('post', 'user/email', function () use ($request) {
         $email = $request->get('email');
     });
