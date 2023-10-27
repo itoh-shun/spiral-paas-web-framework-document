@@ -119,6 +119,31 @@ Router::map("GET",  /user/:userId, function($vars){
 
 これによって、条件によるフィルターをかけ、あたかもリダイレクトしているかのようなふるまいが実装できます。
 
+## MetaRedirect
+前述のとおりHeaderが使えません。そこで、Metaでリダイレクトが可能な機能を用意しました。
+これにより、さらにHeader関数に近しい動作を提供します。
+~~~
+metaRedirect($path, Request $request , $paramsToKeep = [])
+
+$paramsToKeepにはSMPFORMなどルーティング上キープしておきたいクエリーのキーを入れてください。
+
+~~~
+
+このように使用します。
+~~~
+Router::map("GET",  /user/:userId, function($vars){
+    $request = new Request();
+    $auth = auth(); 
+    if($auth->userId !== $vars["userId"]){
+        //ログインしている人と同じIdではない場合
+        Router::metaRedirect('/', $request, ['SMPFORM']);
+    }
+
+    echo "UserId:". $vars["userId"];
+});
+~~~
+
+
 ## CRUD の一括設定
 Router::resourceを使用することで、一括でCRUDのルーティングが設定できます。
 
